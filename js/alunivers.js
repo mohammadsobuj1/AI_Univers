@@ -94,25 +94,31 @@ const displayDetials =(data)=>{
 const {description, pricing,  features, integrations, image_link, input_output_examples
 }= data;
 
-console.log(data)
 
 const DetailesData = document.getElementById('details')
 DetailesData.innerHTML=`
-<p class="font-semibold text-xl ">Description : ${description}  </p>
-<div class="flex mt-5 justify-between  gap-5">
-<p class="font-bold text-green-400 border-0 p-2 shadow-2xl"> ${pricing[0].price}  ${pricing[0].plan  }</P>
-<p class="font-bold text-red-400  border-0 p-2 shadow-2xl"> ${pricing[1].price}  ${pricing[1].plan  }</P>
-<p class="font-bold text-blue-300 border-0  p-2 shadow-2xl" > ${pricing[2].price}  ${pricing[2].plan  }</P>
+
+<div class="flex justify-between gap-5">
+
+
+<div class="border-2 border-orange-300 p-2 ">
+
+<p class="font-semibold  ">Description : ${description}  </p>
+<div class="flex mt-5 justify-between  gap-5 ">
+
+<p class="font-bold text-red-400  border-0  shadow-2xl"> ${pricing[0].price}  ${pricing[0].plan}</P>
+<p class="font-bold text-red-400  border-0  shadow-2xl"> ${pricing[1].price}  ${pricing[1].plan}</P>
+<p class="font-bold text-blue-300 border-0  shadow-2xl" > ${pricing[2].price}  ${pricing[2].plan  }</P>
 
 </div>
 
-<div class="flex justify-between">
+<div class="flex justify-between gap-3">
 <div>
 <p class="font-bold text-xl mt-5">Features</p>
 <ol class="font-mono ...">
-<li>${ features[1].feature_name} </li>
-<li>${ features[2].feature_name} </li>
-<li>${ features[3].feature_name} </li>
+<li> 1. ${ features[1].feature_name} </li>
+<li> 2. ${ features[2].feature_name} </li>
+<li> 3. ${ features[3].feature_name} </li>
 
 </ol>
 </div>
@@ -120,9 +126,9 @@ DetailesData.innerHTML=`
 <div>
 <p class="font-bold text-xl mt-5">Integrations</p>
 <ul class="font-mono ...">
-<li>${ integrations[0]} </li>
-<li>${ integrations[1]} </li>
-<li>${integrations[2]} </li>
+<li> 1. ${ integrations[0]} </li>
+<li> 1. ${ integrations[1]} </li>
+<li> 3. ${integrations[2]} </li>
 
 </ul>
 
@@ -130,10 +136,18 @@ DetailesData.innerHTML=`
 
 </div>
 
-<div>
+
+
+</div>
+
+
+<div class="h-9">
 <img src="${image_link[0]}" alt="">
-<h2 class="font-bold text-xl mt-5 text-center">${input_output_examples[0].input}</h2>
-<h2 class=" font-mono ... text-xl mt-3 w-[75%] mx-auto">${input_output_examples[0].output}</h2>
+<h2 class="font-bold text-xl mt-5 text-centers">${input_output_examples[0].input}</h2>
+<h2 class=" font-mono ... text-xl mt-3 w-full  mx-auto">${input_output_examples[0].output}</h2>
+
+</div>
+
 
 </div>
 
