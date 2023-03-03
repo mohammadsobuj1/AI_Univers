@@ -93,22 +93,22 @@ const loadDetailes = (id )=>{
 const displayDetials =(data)=>{
 const {description, pricing,  features, integrations, image_link, input_output_examples
 }= data;
-
-
+console.log(data)
 const DetailesData = document.getElementById('details')
 DetailesData.innerHTML=`
 
 <div class="flex justify-between gap-5">
 
 
-<div class="border-2 border-orange-300 p-2 ">
+<div class="border-2 border-orange-300  w-[60%] p-2 ">
 
 <p class="font-semibold  ">Description : ${description}  </p>
-<div class="flex mt-5 justify-between  gap-5 ">
+<div class="flex mt-5 justify-between  p-0  gap-2">
 
-<p class="font-bold text-red-400  border-0  shadow-2xl"> ${pricing[0].price}  ${pricing[0].plan}</P>
-<p class="font-bold text-red-400  border-0  shadow-2xl"> ${pricing[1].price}  ${pricing[1].plan}</P>
-<p class="font-bold text-blue-300 border-0  shadow-2xl" > ${pricing[2].price}  ${pricing[2].plan  }</P>
+<p class="font-bold text-red-400  border-0  shadow-2xl"> ${pricing ?pricing[0].price : 'Not Found' }   ${pricing ?pricing[0].plan : 'Not Found'} </P>
+<p class="font-bold text-green-400  border-0  shadow-2xl"> ${pricing ?pricing[1].price : 'Not Found' }   ${pricing ?pricing[1].plan : 'Not Found'} </P>
+<p class="font-bold text-blue-400  border-0  shadow-2xl"> ${pricing ?pricing[2].price : 'Not Found' }   ${pricing ?pricing[2].plan : 'Not Found'} </P>
+
 
 </div>
 
@@ -126,9 +126,11 @@ DetailesData.innerHTML=`
 <div>
 <p class="font-bold text-xl mt-5">Integrations</p>
 <ul class="font-mono ...">
-<li> 1. ${ integrations[0]} </li>
-<li> 1. ${ integrations[1]} </li>
-<li> 3. ${integrations[2]} </li>
+<li> 1. ${ integrations ?  integrations[0] : 'Not Found' } </li>
+<li> 1. ${  integrations ?  integrations[1] : 'Not Found'} </li>
+<li> 3. ${ integrations ?  integrations[2] : 'Not Found'} </li>
+<li> 4. ${ integrations ?  integrations[3] : 'Not Found'} </li>
+<li> 5. ${ integrations ?  integrations[4] : 'Not Found'} </li>
 
 </ul>
 
@@ -137,16 +139,19 @@ DetailesData.innerHTML=`
 </div>
 
 
-
 </div>
 
 
-<div class="h-9">
+<div class="h-9 ">
 <img src="${image_link[0]}" alt="">
-<h2 class="font-bold text-xl mt-5 text-centers">${input_output_examples[0].input}</h2>
-<h2 class=" font-mono ... text-xl mt-3 w-full  mx-auto">${input_output_examples[0].output}</h2>
+<h2></h2>
+<h2 class="font-bold text-xl mt-5 text-centers">${input_output_examples ? input_output_examples[0].input : 'Not Found' }</h2>
+<h2 class="  mt-5 text-centers">${input_output_examples ? input_output_examples[0].output : 'Not Found' }</h2>
 
-</div>
+
+</div> 
+
+
 
 
 </div>
@@ -162,6 +167,7 @@ DetailesData.innerHTML=`
 
 
 // Detailes section end
+
 
 
 
