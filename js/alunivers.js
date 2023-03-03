@@ -35,10 +35,10 @@ div.innerHTML= `
           <img src="${image}" alt="Shoes" class="rounded-xl" />
         </figure>
         <div class="card-body ">
-          <h2 class="card-title">Features</h2>
-          <p>1. ${features[0]} </p>
-          <p>2. ${features[1]} </p>
-          <p class="border-0 border-b-4 ">3. ${features[2] ? features[2] : 'No feture' } </p>
+          <h2 class="card-title ">Features</h2>
+          <p class="text-sm">1. ${features[0]} </p>
+          <p class="text-sm">2. ${features[1]} </p>
+          <p class="border-0 border-b-4 text-sm">3. ${features[2] ? features[2] : 'No feture' } </p>
           
         <div class="flex justify-between">
         <div>
@@ -46,7 +46,7 @@ div.innerHTML= `
         <p class="mt-2"><i class="fa-regular fa-calendar-days"></i> ${published_in}</p>
         </div>
         <div class="card-actions  mt-4 ">  
-        <label for="my-modal-3" class=" text-orange-500 " onclick=" loadDetailes('${id}')"><i class="fa-solid fa-arrow-right"></i></label>
+        <label for="my-modal-3" class=" text-orange-500 " onclick="  loadDetailes ('${id }')"><i class="fa-solid fa-arrow-right"></i></label>
       </div>
 </div>
 </div>
@@ -56,6 +56,7 @@ div.innerHTML= `
 
       cardSection.appendChild(div)
     });
+   
 }
 
 // cardSection end 
@@ -64,7 +65,7 @@ div.innerHTML= `
 // see all btn section  
 
 const prosearchData =(limit)=>{
-
+  loadersection (true)
 loadData(limit)    
 }
 
@@ -76,6 +77,20 @@ document.getElementById('showall-btn').addEventListener('click', function(){
 loadData('06')
 
 // see all btn section end 
+
+
+
+const loadersection =(isloading)=>{
+  const loader = document.getElementById('loader')
+  if(isloading ){
+  loader.classList.remove('hidden')
+  }
+  else{
+  loader.classList.add('hidden')
+  }
+  }
+  
+
 
 
 
@@ -91,16 +106,16 @@ const loadDetailes = (id )=>{
 
 }
 
-const displayDetials =(data)=>{
+const displayDetials =(data )=>{
 const {description, pricing,  features, integrations, image_link, input_output_examples, accuracy
   }= data;
-console.log(data
-    )
 
+ 
+  
 
+    const DetailesData = document.getElementById('details')
+DetailesData.innerHTML='';
 
-
-const DetailesData = document.getElementById('details')
 DetailesData.innerHTML=`
 
 <div class="flex justify-between gap-5">
@@ -152,8 +167,11 @@ DetailesData.innerHTML=`
 
 
 
-<h2   class="absolute ... bg-orange-400 ml-24 text-white px-2 mt-2 h-5  rounded-md text-xs ">accuracy: 
-${accuracy.score*100 ?accuracy.score*100 : "None"}%</h2>
+<div id="accuracy-btn" class="hidden" >
+
+<h2  class="absolute ... bg-orange-400 ml-24 text-white px-2 mt-2 h-5  rounded-md text-xs   ">accuracy: 
+${accuracy.score*100 ?accuracy.score*100 :'none'}%</h2>
+</div>
 
 
       <img src="${image_link[0]}" alt="">
@@ -175,19 +193,31 @@ ${accuracy.score*100 ?accuracy.score*100 : "None"}%</h2>
 
 
 `
+// const accuracyBtn= document.getElementById('accuracy-btn')
+// console.log(accuracyBtn)
+// if(accuracy.score == null ){
+//  accuracyBtn.classList.remove('hidden')
+// }
+
+loadersection (false)
 
 
-
-
-   
 }
+
+
+array.sort(function(a,b){
+  // Turn your strings into dates, and then subtract them
+  // to get a value that is either negative, positive, or zero.
+  return new Date(b.date) - new Date(a.date);
+});
+
+
+
+
 
 
 
 // Detailes section end
-
-
-
 
 
 
