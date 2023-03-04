@@ -35,10 +35,20 @@ else{
     seeallBtn.classList.add('hidden')
 }
 
+
     data.forEach(alltools => {
         const {image, features, name, published_in, id}=alltools;
         
-      
+      let featurediv =[];
+
+      if(features != null){
+  
+       features.map((x)=>{
+         const i =`<li>${x   }</li>`
+       featurediv +=i 
+        })
+      }
+    
 
       const div = document.createElement('div')
       div.classList.add("border-2")
@@ -53,9 +63,8 @@ div.innerHTML= `
         </figure>
         <div class="card-body ">
           <h2 class="card-title ">Features</h2>
-          <p class="text-sm">1. ${features[0]} </p>
-          <p class="text-sm">2. ${features[1]} </p>
-          <p class="border-0 border-b-4 text-sm">3. ${features[2] ? features[2] : 'No feture' } </p>
+          <p class="text-sm"> ${featurediv} </p>
+          
           
         <div class="flex justify-between">
         <div>
@@ -148,9 +157,8 @@ const displayDetials =(data )=>{
 const {description, pricing,  features, integrations, image_link, input_output_examples, accuracy
   }= data;
 
-  console.log(data)
 
-// const [ind1, ind2, ind3, ind4, ind5 ]= integrations || []
+
 let integration =""
 
 if(integrations != null){
@@ -160,12 +168,6 @@ if(integrations != null){
   integration +=i 
   })
 }
-
-
-
-
-
-
 
 
 
@@ -197,18 +199,18 @@ DetailesData.innerHTML=`
 <div class="flex justify-between gap-3">
 <div>
 <p class="font-bold text-xl mt-5">Features</p>
-<ol class="font-mono ... text-sm">
-<li> 1. ${ features[1].feature_name} </li>
-<li> 2. ${ features[2].feature_name} </li>
-<li> 3. ${ features[3].feature_name} </li>
+<ol class="font-mono ... text-sm mt-2">
+<li>  ${ features[1].feature_name} </li>
+<li>  ${ features[2].feature_name} </li>
+<li>  ${ features[3].feature_name} </li>
 
 </ol>
 </div>
 
 <div>
 <p class="font-bold text-xl mt-5">Integrations</p>
-<ul class="font-mono ... text-sm">
-<li>  ${  integration ? integration : 'Not found'} </li>
+<ul class="font-mono ... text-sm ml-4 mt-2">
+<p>  ${  integration ? integration : 'Not found'} </p>
 </ul>
 
 </div>
@@ -257,11 +259,6 @@ ${accuracy.score*100}%</h2>` : ''}
 
 
 
-// <li> 1. ${ ind1 ? ind1: ' Not found' } </li>
-// <li> 2.  ${  ind2 ? ind2: ''} </li>
-// <li> 3. ${  ind3 ? ind3: ''} </li>
-// <li> 4. ${ ind4 ? ind4: ''} </li>
-// <li> 5. ${  ind5 ? ind5: ''} </li>
 
 
 
