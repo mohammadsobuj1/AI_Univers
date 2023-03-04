@@ -1,28 +1,44 @@
+
+let sortData =[];
+
 const loadData = (limit)=>{
     fetch('https://openapi.programming-hero.com/api/ai/tools')
     .then(res => res.json())
-    .then(data =>displayData(data.data.tools, limit))
+    .then(data =>{
+      displayData(data.data.tools, limit)
+     
+      sortData = data.data.tools.sort((a, b)=>new Date(b.published_in)- new Date(a.published_in))
+      loadersection (false)
+    })
 }
-
 // cardSection start
 
+
+
+
+
 const displayData =(data, limit)=>{
-    
+
+
+
+
 const cardSection = document.getElementById('card-section')
 cardSection.innerHTML='';
 const seeallBtn =document.getElementById('seeall-btn')
 
-if(limit && data.length > 6){
-    data= data.slice(0, 6)
+if(limit && data.length > 2){
+    data= data.slice(0, 2)
     seeallBtn.classList.remove('hidden')
     }
 else{
     seeallBtn.classList.add('hidden')
 }
 
-
     data.forEach(alltools => {
         const {image, features, name, published_in, id}=alltools;
+        
+      
+
       const div = document.createElement('div')
       div.classList.add("border-2")
    
@@ -52,9 +68,10 @@ div.innerHTML= `
 </div>
 
 `
-
+loadersection (true)
 
       cardSection.appendChild(div)
+     
     });
    
 }
@@ -62,16 +79,32 @@ div.innerHTML= `
 // cardSection end 
 
 
+
+
+   
+document.getElementById('sort-btn').addEventListener('click', function(){
+  displayData(sortData)
+ 
+})
+  
+
+
+
+
+
 // see all btn section  
 
 const prosearchData =(limit)=>{
-  loadersection (true)
-loadData(limit)    
+  
+loadData(limit) 
+ 
 }
 
 
 document.getElementById('showall-btn').addEventListener('click', function(){
+
     prosearchData()
+    
 })
 
 loadData('06')
@@ -83,10 +116,11 @@ loadData('06')
 const loadersection =(isloading)=>{
   const loader = document.getElementById('loader')
   if(isloading ){
-  loader.classList.remove('hidden')
+  
+  loader.classList.add('hidden')
   }
   else{
-  loader.classList.add('hidden')
+    loader.classList.remove('hidden')
   }
   }
   
@@ -102,16 +136,24 @@ const loadDetailes = (id )=>{
     fetch(url)
      .then(res=> res.json())
     .then(data => displayDetials(data.data))
+    
 
 
 }
 
 const displayDetials =(data )=>{
+
 const {description, pricing,  features, integrations, image_link, input_output_examples, accuracy
   }= data;
 
- 
-  
+// const [ind1, ind2, ind3, ind4, ind5 ]= integrations || []
+
+let feturediv =""
+integrations.map((x)=>{
+ const i =`<li>${x ? x:"no data"}</li>`
+feturediv +=i
+})
+
 
     const DetailesData = document.getElementById('details')
 DetailesData.innerHTML='';
@@ -147,12 +189,7 @@ DetailesData.innerHTML=`
 <div>
 <p class="font-bold text-xl mt-5">Integrations</p>
 <ul class="font-mono ... text-sm">
-<li> 1. ${ integrations ?  integrations[0] : 'Not Found' } </li>
-<li> 1. ${  integrations ?  integrations[1] : 'Not Found'} </li>
-<li> 3. ${ integrations ?  integrations[2] : 'Not Found'} </li>
-<li> 4. ${ integrations ?  integrations[3] : 'Not Found'} </li>
-<li> 5. ${ integrations ?  integrations[4] : 'Not Found'} </li>
-
+<li>  ${  feturediv } </li>
 </ul>
 
 </div>
@@ -191,25 +228,21 @@ ${accuracy.score*100 ?accuracy.score*100 :'none'}%</h2>
 
 
 
-
 `
-// const accuracyBtn= document.getElementById('accuracy-btn')
-// console.log(accuracyBtn)
-// if(accuracy.score == null ){
-//  accuracyBtn.classList.remove('hidden')
-// }
 
-loadersection (false)
+
 
 
 }
 
 
-array.sort(function(a,b){
-  // Turn your strings into dates, and then subtract them
-  // to get a value that is either negative, positive, or zero.
-  return new Date(b.date) - new Date(a.date);
-});
+
+
+// <li> 1. ${ ind1 ? ind1: ' Not found' } </li>
+// <li> 2.  ${  ind2 ? ind2: ''} </li>
+// <li> 3. ${  ind3 ? ind3: ''} </li>
+// <li> 4. ${ ind4 ? ind4: ''} </li>
+// <li> 5. ${  ind5 ? ind5: ''} </li>
 
 
 
