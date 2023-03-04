@@ -187,7 +187,7 @@ DetailesData.innerHTML=`
 <div class="flex mt-5 justify-between  p-0  gap-2 text-sm bg-gray-100  ">
 
 <p class="font-bold text-red-400  border-0  shadow-2xl mt-4"> ${pricing ?pricing?.[0].price !="No cost" ? pricing?.[0].price :'free of cost': 'Not Found' }   ${pricing?pricing?.[0].plan : 'Not Found'} </P>
-<p class="font-bold text-red-400  border-0  shadow-2xl mt-4"> ${pricing ?pricing?.[1].price !="No cost" ? pricing?.[1].price :'free of cost': 'Not Found' }   ${pricing?pricing?.[1].plan : 'Not Found'} </P>
+<p class="font-bold text-green-400  border-0  shadow-2xl mt-4"> ${pricing ?pricing?.[1].price !="No cost" ? pricing?.[1].price :'free of cost': 'Not Found' }   ${pricing?pricing?.[1].plan : 'Not Found'} </P>
 
 <p class="font-bold text-blue-400  border-0  shadow-2xl  "> ${pricing ?pricing[2].price : 'Not Found' }   ${pricing ?pricing[2].plan : 'Not Found'} </P>
 
