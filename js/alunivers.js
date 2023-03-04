@@ -7,9 +7,10 @@ const loadData = (limit)=>{
     .then(data =>{
       displayData(data.data.tools, limit)
      
-      sortData = data.data.tools.sort((a, b)=>new Date(b.published_in)- new Date(a.published_in))
-      loadersection (false)
+      sortData = data.data.tools.sort((a, b)=>new Date(a.published_in)- new Date(b.published_in))
+     
     })
+   
 }
 // cardSection start
 
@@ -68,12 +69,12 @@ div.innerHTML= `
 </div>
 
 `
-loadersection (true)
+
 
       cardSection.appendChild(div)
-     
+      loadersection(false)
     });
-   
+  
 }
 
 // cardSection end 
@@ -119,13 +120,12 @@ const loadersection =(isloading)=>{
   
   loader.classList.add('hidden')
   }
+ 
   else{
-    loader.classList.remove('hidden')
+    loader.classList.add('hidden')
   }
   }
   
-
-
 
 
 // Detailes section start
@@ -141,18 +141,33 @@ const loadDetailes = (id )=>{
 
 }
 
+
+
 const displayDetials =(data )=>{
 
 const {description, pricing,  features, integrations, image_link, input_output_examples, accuracy
   }= data;
 
-// const [ind1, ind2, ind3, ind4, ind5 ]= integrations || []
+  console.log(data)
 
-let feturediv =""
-integrations.map((x)=>{
- const i =`<li>${x ? x:"no data"}</li>`
-feturediv +=i
-})
+// const [ind1, ind2, ind3, ind4, ind5 ]= integrations || []
+let integration =""
+
+if(integrations != null){
+  
+  integrations.map((x)=>{
+   const i =`<li>${x   }</li>`
+  integration +=i 
+  })
+}
+
+
+
+
+
+
+
+
 
 
     const DetailesData = document.getElementById('details')
@@ -168,8 +183,12 @@ DetailesData.innerHTML=`
 <p class="font-semibold  ">Description : ${description}  </p>
 <div class="flex mt-5 justify-between  p-0  gap-2 text-sm">
 
-<p class="font-bold text-red-400  border-0  shadow-2xl"> ${pricing ?pricing[0].price : 'Not Found' }   ${pricing ?pricing[0].plan : 'Not Found'} </P>
-<p class="font-bold text-green-400  border-0  shadow-2xl"> ${pricing ?pricing[1].price : 'Not Found' }   ${pricing ?pricing[1].plan : 'Not Found'} </P>
+<p class="font-bold text-red-400  border-0  shadow-2xl"> ${pricing ?pricing?.[0].price !="No cost" ? pricing?.[0].price :'free of cost': 'Not Found' }   ${pricing?pricing?.[0].plan : 'Not Found'} </P>
+<p class="font-bold text-red-400  border-0  shadow-2xl"> ${pricing ?pricing?.[1].price !="No cost" ? pricing?.[1].price :'free of cost': 'Not Found' }   ${pricing?pricing?.[1].plan : 'Not Found'} </P>
+
+
+
+
 <p class="font-bold text-blue-400  border-0  shadow-2xl"> ${pricing ?pricing[2].price : 'Not Found' }   ${pricing ?pricing[2].plan : 'Not Found'} </P>
 
 
@@ -189,7 +208,7 @@ DetailesData.innerHTML=`
 <div>
 <p class="font-bold text-xl mt-5">Integrations</p>
 <ul class="font-mono ... text-sm">
-<li>  ${  feturediv } </li>
+<li>  ${  integration ? integration : 'Not found'} </li>
 </ul>
 
 </div>
@@ -204,10 +223,10 @@ DetailesData.innerHTML=`
 
 
 
-<div id="accuracy-btn" class="hidden" >
+<div id="accuracy-btn" class="" >
 
-<h2  class="absolute ... bg-orange-400 ml-24 text-white px-2 mt-2 h-5  rounded-md text-xs   ">accuracy: 
-${accuracy.score*100 ?accuracy.score*100 :'none'}%</h2>
+ ${accuracy.score ?`<h2    class="absolute ... bg-orange-400 ml-24 text-white px-2 mt-2 h-5  rounded-md text-xs   ">accuracy: 
+${accuracy.score*100}%</h2>` : ''}
 </div>
 
 
@@ -231,9 +250,9 @@ ${accuracy.score*100 ?accuracy.score*100 :'none'}%</h2>
 `
 
 
-
-
 }
+
+
 
 
 
